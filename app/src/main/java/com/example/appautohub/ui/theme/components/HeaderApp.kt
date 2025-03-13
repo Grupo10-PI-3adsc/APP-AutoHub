@@ -2,7 +2,9 @@ package com.example.appautohub.ui.theme.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -43,13 +45,16 @@ fun HeaderApp() {
 
 @Composable
 fun HeaderTitle(title: String) {
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 16.dp)
     ) {
+
         Button(
             onClick = { },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+            modifier = Modifier.align(Alignment.CenterStart) // Mantém o botão fixo à esquerda
         ) {
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
@@ -58,10 +63,10 @@ fun HeaderTitle(title: String) {
             )
         }
         Text(
-            title,
+            text = title,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(start = 12.dp, top = 12.dp)
+            modifier = Modifier.align(Alignment.Center) // Centraliza o título independentemente do ícone
         )
     }
 }
