@@ -1,5 +1,6 @@
 package com.example.appautohub.Pagamento
 
+import com.example.appautohub.ui.theme.components.HeaderApp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -45,20 +46,8 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
             .background(Color.White)
     )
     {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-                .background(Color.DarkGray)
-                .padding(0.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                modifier = Modifier.padding(start = 20.dp),
-                painter = painterResource(id = R.drawable.lotus),
-                contentDescription = "Logo lotus"
-            )
-        }
+
+        HeaderApp()
 
     Box(
         modifier = Modifier
