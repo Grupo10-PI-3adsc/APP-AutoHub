@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.appautohub.R
 import com.example.appautohub.ui.theme.AppAutoHubTheme
+import com.example.appautohub.ui.theme.components.HeaderTitle
 
 @Composable
 fun PaymentScreen(modifier: Modifier = Modifier) {
@@ -61,27 +62,8 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Voltar",
-                    tint = Color.Black
-                )
-            }
-                Text(
-                    "MÉTODO DE PAGAMENTO",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 12.dp, top = 12.dp)
-                )
-            }
+            HeaderTitle("MÉTODO DE PAGAMENTO")
+
             Spacer(modifier = Modifier.height(16.dp))
 
             paymentMethods.forEachIndexed { index, method ->
