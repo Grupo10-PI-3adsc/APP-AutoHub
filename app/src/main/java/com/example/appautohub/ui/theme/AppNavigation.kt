@@ -5,6 +5,7 @@ import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
+import com.example.appautohub.classes.Produto
 import com.example.appautohub.paginas.BemVindo.WelcomeScreen
 import com.example.appautohub.paginas.Cadastro.RegisterScreen
 import com.example.appautohub.paginas.Login.LoginScreen
@@ -23,7 +24,8 @@ fun AppNavigator() {
         composable("register") { RegisterScreen() }
         composable("payment") { PaymentScreen(navController) }
         composable("pix") {  }
-        composable("cartao") { CardScreen() }
-        composable("boleto") { BoletoScreen() }
+        composable("cartao") { CardScreen(navController) }
+        composable("boleto") { BoletoScreen(navController) }
+//        composable("produtos" ) {Produto(null, navController)}
     }
 }

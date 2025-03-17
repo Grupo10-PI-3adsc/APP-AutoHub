@@ -29,6 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.classes.Produto
 import com.example.appautohub.ui.theme.AppAutoHubTheme
@@ -47,7 +49,7 @@ val listaProdutos = listOf(
 )
 
 @Composable
-fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier){
+fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navController: NavController){
 
     var qrcode = R.drawable.pix_qrcode
 
@@ -57,7 +59,7 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier){
             .background(Color(245, 240, 242))
     )
     {
-        HeaderApp()
+        HeaderApp(navController)
         Spacer(modifier = Modifier.height(16.dp))
         HeaderTitle("PIX")
         Spacer(modifier = Modifier.height(16.dp))
@@ -145,9 +147,10 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Products(listaProdutos , modifier = Modifier.padding(innerPadding))
+            Products(listaProdutos , modifier = Modifier.padding(innerPadding), navController)
         }
     }
 }

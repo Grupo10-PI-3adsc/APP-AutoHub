@@ -2,6 +2,7 @@ package com.example.appautohub.ui.theme.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,27 +23,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.appautohub.R
 
 @Composable
-fun HeaderApp() {
+fun HeaderApp(navController: NavController?) {
     Row(
-        modifier = Modifier.run {
-            fillMaxWidth()
-                .height(80.dp)
-                .background(Color.DarkGray)
-                .padding(0.dp)
-        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .background(Color.DarkGray)
+            .padding(0.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            modifier = Modifier.padding(start = 20.dp),
+            modifier = Modifier
+                .padding(start = 20.dp)
+                .clickable {
+                    // Verifica se o NavController não é nulo e se há tela anterior
+                    navController?.popBackStack()
+                },
             painter = painterResource(id = R.drawable.lotus),
             contentDescription = "Logo lotus"
         )
     }
 }
-
 @Composable
 fun HeaderTitle(title: String) {
     Box(

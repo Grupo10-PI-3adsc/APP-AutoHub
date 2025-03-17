@@ -47,7 +47,7 @@ fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
     )
     {
 
-        HeaderApp()
+        HeaderApp(navController)
 
     Box(
         modifier = Modifier

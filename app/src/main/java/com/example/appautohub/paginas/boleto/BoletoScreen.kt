@@ -29,6 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.paginas.card.CardScreen
 import com.example.appautohub.ui.theme.AppAutoHubTheme
@@ -36,7 +38,7 @@ import com.example.appautohub.ui.theme.components.HeaderApp
 import com.example.appautohub.ui.theme.components.HeaderTitle
 
 @Composable
-fun BoletoScreen() {
+fun BoletoScreen(navController: NavController) {
     var boleto by remember { mutableStateOf("") }
 
     Column(
@@ -44,7 +46,7 @@ fun BoletoScreen() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        HeaderApp()
+        HeaderApp(navController)
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -115,7 +117,9 @@ fun BoletoScreen() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
+
     AppAutoHubTheme {
-        BoletoScreen()
+        BoletoScreen(navController)
     }
 }
