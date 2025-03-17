@@ -1,4 +1,4 @@
-package com.example.appautohub.Cadastro
+package com.example.appautohub.paginas.Cadastro
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

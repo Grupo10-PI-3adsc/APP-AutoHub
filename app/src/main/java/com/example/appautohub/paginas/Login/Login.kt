@@ -1,4 +1,4 @@
-package com.example.appautohub.Login
+package com.example.appautohub.paginas.Login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.example.appautohub.boleto
+package com.example.appautohub.paginas.boleto
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appautohub.R
-import com.example.appautohub.card.CardScreen
+import com.example.appautohub.paginas.card.CardScreen
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 import com.example.appautohub.ui.theme.components.HeaderApp
 import com.example.appautohub.ui.theme.components.HeaderTitle

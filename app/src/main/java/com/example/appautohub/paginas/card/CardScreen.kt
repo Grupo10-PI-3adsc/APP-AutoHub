@@ -1,4 +1,4 @@
-package com.example.appautohub.card
+package com.example.appautohub.paginas.card
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -45,7 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appautohub.R
-import com.example.appautohub.payment.PaymentScreen
+import com.example.appautohub.paginas.payment.PaymentScreen
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 import com.example.appautohub.ui.theme.components.HeaderApp
 import com.example.appautohub.ui.theme.components.HeaderTitle

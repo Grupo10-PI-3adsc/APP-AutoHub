@@ -1,4 +1,4 @@
-package com.example.appautohub.payment
+package com.example.appautohub.paginas.payment
 
 import com.example.appautohub.ui.theme.components.HeaderApp
 import androidx.compose.foundation.Image

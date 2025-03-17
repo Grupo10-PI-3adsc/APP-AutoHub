@@ -10,7 +10,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.appautohub.payment.PaymentScreen
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.appautohub.paginas.payment.PaymentScreen
+import com.example.appautohub.paginas.produtos.Products
+import com.example.appautohub.paginas.produtos.listaProdutos
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,5 +36,15 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    AppAutoHubTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Products(listaProdutos , modifier = Modifier.padding(innerPadding))
+        }
+    }
 }
 

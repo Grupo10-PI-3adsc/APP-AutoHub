@@ -1,4 +1,4 @@
-package com.example.appautohub.BemVindo
+package com.example.appautohub.paginas.BemVindo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
