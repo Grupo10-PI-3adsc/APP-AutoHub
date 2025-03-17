@@ -44,6 +44,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.paginas.payment.PaymentScreen
 import com.example.appautohub.ui.theme.AppAutoHubTheme
@@ -51,7 +53,7 @@ import com.example.appautohub.ui.theme.components.HeaderApp
 import com.example.appautohub.ui.theme.components.HeaderTitle
 
 @Composable
-fun CardScreen() {
+fun CardScreen(navController: NavController) {
     var text by remember { mutableStateOf("") }
 
     var expandedMonth by remember { mutableStateOf(false) }
@@ -67,7 +69,7 @@ fun CardScreen() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        HeaderApp()
+        HeaderApp(navController)
 
         Box(
             modifier = Modifier
@@ -218,7 +220,9 @@ fun CardScreen() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController() // Criando o NavController na Preview
+
     AppAutoHubTheme {
-       CardScreen()
+        CardScreen(navController) // Passando o NavController para o CardScreen
     }
 }

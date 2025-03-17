@@ -21,6 +21,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.classes.Produto
 import com.example.appautohub.ui.theme.AppAutoHubTheme
@@ -39,7 +41,7 @@ val listaProdutos = listOf(
 )
 
 @Composable
-fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier){
+fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navController: NavController){
 
     val headers = listOf("Tipo", "Data", "Produtos", "Valor", "")
     val itemsList = listOf(
@@ -55,7 +57,7 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier){
             .background(Color(245, 240, 242))
     )
     {
-        HeaderApp()
+        HeaderApp(navController)
         Spacer(modifier = Modifier.height(16.dp))
         HeaderTitle("PEDIDOS")
         Spacer(modifier = Modifier.height(16.dp))
@@ -121,9 +123,10 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Products(listaProdutos , modifier = Modifier.padding(innerPadding))
+            Products(listaProdutos , modifier = Modifier.padding(innerPadding), navController)
         }
     }
 }
