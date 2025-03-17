@@ -16,7 +16,7 @@ import com.example.appautohub.paginas.produtos.Products
 import com.example.appautohub.paginas.produtos.listaProdutos
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
-class MainActivity : ComponentActivity() {
+/* class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+} */
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

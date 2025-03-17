@@ -20,12 +20,14 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 import com.example.appautohub.ui.theme.components.HeaderTitle
 
 @Composable
-fun PaymentScreen(modifier: Modifier = Modifier) {
+fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
     var selectedMethod by remember { mutableStateOf(0) }
 
     val paymentMethods = listOf("Pix", "Cartão de crédito", "Boleto")
@@ -69,7 +71,7 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
                         .fillMaxWidth()
                         .padding(vertical = 8.dp)
                         .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
-                        .clickable { selectedMethod = index }
+                        .clickable { selectedMethod = index } // Define o método de pagamento selecionado
                         .padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -82,7 +84,7 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
                     Spacer(modifier = Modifier.weight(1f))
                     RadioButton(
                         selected = selectedMethod == index,
-                        onClick = { selectedMethod = index}
+                        onClick = null // Remove a necessidade de clique aqui, já que o `Row` é clicável
                     )
                 }
             }
@@ -117,7 +119,13 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = {  },
+                onClick = {
+                    when (selectedMethod) {
+                        0 -> navController.navigate("pix")
+                        1 -> navController.navigate("cartao")
+                        2 -> navController.navigate("boleto")
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -126,6 +134,7 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
             ) {
                 Text("Prosseguir", fontSize = 16.sp, color = Color.Black)
             }
+
         }
     }
     }
@@ -134,9 +143,12 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController() // Criando um NavController para a preview
+
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            PaymentScreen(modifier = Modifier.padding(innerPadding))
+            PaymentScreen(navController = navController, modifier = Modifier.padding(innerPadding))
         }
     }
 }
+
