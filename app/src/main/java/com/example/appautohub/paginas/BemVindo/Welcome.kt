@@ -18,12 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
 
 @Composable
-fun WelcomeScreen(modifier: Modifier = Modifier) {
+fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
     val preto = Color(0xFF30323D)
     val amarelo = Color(0xFFE8C547)
     val branco = Color(0xFFFFF9FB)
@@ -88,14 +90,14 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Button(
-                            onClick = { /* Navegar para Login */ },
+                            onClick = { navController.navigate("login") },
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(containerColor = preto)
                         ) {
                             Text(text = "Login", fontSize = 16.sp, color = branco)
                         }
                         Button(
-                            onClick = { /* Navegar para Cadastro */ },
+                            onClick = { navController.navigate("cadastro") },
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(containerColor = amarelo)
                         ) {
@@ -111,9 +113,11 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
+
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            WelcomeScreen(modifier = Modifier.padding(innerPadding))
+            WelcomeScreen(navController = navController, modifier = Modifier.padding(innerPadding))
         }
     }
 }
