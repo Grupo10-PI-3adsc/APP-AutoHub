@@ -64,11 +64,11 @@ fun BoletoScreen(navController: NavController) {
 
                 Text("Pague de forma segura e instantânea!\n" +
                         "Ao finalizar o pedido, você verá o código para fazer o pagamento.\n" +
-                        "Ao continuar, você concorda com nossos Termos e Condições.")
+                        "Ao continuar, você concorda com nossos Termos e Condições.", color = Color(0xFF30323D))
 
                 Spacer(modifier = Modifier.height(25.dp))
 
-                Text("Código de barras")
+                Text("Código de barras", color = Color(0xFF30323D))
                 Row {
                     OutlinedTextField(
                         value = boleto,
@@ -83,7 +83,7 @@ fun BoletoScreen(navController: NavController) {
                                 modifier = Modifier.size(20.dp) // Tamanho do ícone
                             )
                         },
-                        label = { Text("Boleto") }
+                        label = { Text("Boleto", color = Color(0xFF30323D)) }
                     )
                 }
 
@@ -93,7 +93,7 @@ fun BoletoScreen(navController: NavController) {
                     "Para pagar com boleto, gere o documento ou copie o código de barras ou baixe o arquivo. " +
                             "Em seguida, use o app do seu banco ou vá até uma agência bancária ou casa lotérica " +
                             "para realizar o pagamento. Após a compensação, que pode levar até 3 dias úteis, o " +
-                            "status do pedido será atualizado automaticamente no app."
+                            "status do pedido será atualizado automaticamente no app.", color = Color(0xFF30323D)
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
@@ -104,9 +104,9 @@ fun BoletoScreen(navController: NavController) {
                         .fillMaxWidth()
                         .height(48.dp),
                     shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(232, 197, 71))
                 ) {
-                    Text("Efetuar Pagamento", fontSize = 16.sp, color = Color.Black)
+                    Text("Efetuar Pagamento", fontSize = 16.sp, color = Color(0xFF30323D))
                 }
             }
         }

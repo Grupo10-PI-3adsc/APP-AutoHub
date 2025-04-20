@@ -36,11 +36,11 @@ fun HeaderApp(navController: NavController?) {
             .padding(0.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         Image(
             modifier = Modifier
                 .padding(start = 20.dp)
                 .clickable {
-                    // Verifica se o NavController não é nulo e se há tela anterior
                     navController?.popBackStack()
                 },
             painter = painterResource(id = R.drawable.lotus),
@@ -71,6 +71,7 @@ fun HeaderTitle(title: String) {
             text = title,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
+            color = Color(0xFF30323D),
             modifier = Modifier.align(Alignment.Center) // Centraliza o título independentemente do ícone
         )
     }

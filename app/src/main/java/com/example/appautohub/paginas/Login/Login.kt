@@ -1,47 +1,49 @@
 package com.example.appautohub.paginas.Login
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
+import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
+    var email by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
+    val viewModel = remember { UsuarioViewModel() }
+    val context = LocalContext.current
+
     val preto = Color(0xFF30323D)
-    val cinza = Color(0xFF8B9EB7)
     val amarelo = Color(0xFFE8C547)
     val branco = Color(0xFFFFF9FB)
 
-
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
+
+//        navController.navigate("login") {
+//            popUpTo("welcome") { inclusive = true }
+//        }
+
         Image(
             painter = painterResource(id = R.drawable.imagem_cadastro),
             contentDescription = null,
@@ -50,11 +52,9 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         )
 
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Spacer(modifier = Modifier.weight(1f))
 
             Box(
@@ -74,16 +74,14 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                         text = "Login",
                         fontSize = 35.sp,
                         fontWeight = FontWeight.Bold,
+                        color = Color(0xFF30323D),
                         modifier = Modifier.padding(top = 8.dp, bottom = 20.dp)
                     )
 
-                    var nome by remember { mutableStateOf("") }
-                    var senha by remember { mutableStateOf("") }
-
                     OutlinedTextField(
-                        value = nome,
-                        onValueChange = { nome = it },
-                        label = { Text("Nome") },
+                        value = email,
+                        onValueChange = { email = it },
+                        label = { Text("Email", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -91,38 +89,52 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     OutlinedTextField(
                         value = senha,
                         onValueChange = { senha = it },
-                        label = { Text("Senha") },
+                        label = { Text("Senha", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End // Alinha o texto à direita
+                        horizontalArrangement = Arrangement.End
                     ) {
-                        TextButton(onClick = { /* Lógica para recuperar senha */ }) {
+                        TextButton(onClick = { /* TODO: Implementar recuperação de senha */ }) {
                             Text(text = "Esqueceu a senha?", fontSize = 16.sp, color = preto)
                         }
                     }
 
-                    Button(onClick = { /* Lógica de cadastro */ },
-                        modifier = Modifier.fillMaxWidth().height(60.dp),
+                    Button(
+                        onClick = {
+                            Toast.makeText(context, "Email: $email\nSenha: $senha", Toast.LENGTH_SHORT).show()
+
+                            viewModel.loginUsuario(email, senha) { sucesso, usuario ->
+                                if (sucesso) {
+                                    Toast.makeText(context, "Token: ${usuario?.token}", Toast.LENGTH_LONG).show()
+                                    navController.navigate("produtos")
+                                } else {
+                                    Toast.makeText(context, "Login falhou", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = amarelo)
-                    ){
+                    ) {
                         Text(text = "Fazer Login", fontSize = 20.sp, color = preto)
                     }
+
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AppAutoHubTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            LoginScreen(modifier = Modifier.padding(innerPadding))
-        }
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun LoginScreenPreview() {
+//    val navController = rememberNavController()
+//    AppAutoHubTheme {
+//        LoginScreen(navController)
+//    }
+//}

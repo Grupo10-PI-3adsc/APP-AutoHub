@@ -49,7 +49,7 @@ val listaProdutos = listOf(
 )
 
 @Composable
-fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navController: NavController){
+fun Pix(navController: NavController, modifier: Modifier = Modifier){
 
     var qrcode = R.drawable.pix_qrcode
 
@@ -73,6 +73,7 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navCont
                     "Ao finalizar o pedido, você verá o código para fazer o pagamento.\n" +
                     "Ao continuar, você concorda com nossos Termos e Condições.",
                 fontSize = 13.sp,
+                color = Color(0xFF30323D),
                 style = TextStyle.Default.copy(
                     lineBreak = LineBreak.Simple
                 )
@@ -98,11 +99,13 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navCont
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .padding(end = 5.dp)
+                        .padding(end = 5.dp),
+                    color = Color(0xFF30323D)
                 )
                 Text(
                     text = "A9823891HDHCDSCSA210312",
                     fontSize = 13.sp,
+                    color = Color(0xFF30323D),
                     modifier = Modifier
                         .border(BorderStroke(1.dp,
                             Color(234, 205, 25)),
@@ -116,6 +119,7 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navCont
             Text("Para pagar com QR Code, basta escanear o código exibido na tela usando o app do seu banco ou carteira digital, conferir os dados e confirmar. Já com o Pix Copia e Cola, copie o código gerado, cole no app do seu banco na opção Pix, confira os detalhes e finalize. Ambas as opções são rápidas, seguras e atualizam o pedido automaticamente. ." ,
                 fontSize = 13.sp,
                 fontWeight = FontWeight(340),
+                color = Color(0xFF30323D),
                 style = TextStyle.Default.copy(
                     lineBreak = LineBreak.Simple
                 )
@@ -150,7 +154,7 @@ fun GreetingPreview() {
     val navController = rememberNavController()
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Products(listaProdutos , modifier = Modifier.padding(innerPadding), navController)
+            Pix( navController, modifier = Modifier.padding(innerPadding))
         }
     }
 }

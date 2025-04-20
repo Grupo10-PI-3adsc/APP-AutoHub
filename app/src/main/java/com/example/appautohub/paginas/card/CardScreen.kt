@@ -97,17 +97,18 @@ fun CardScreen(navController: NavController) {
 
                     Text(
                         "Insira as Informações:",
-                        Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                        color = Color(0xFF30323D)
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Text("Nome do cartão")
+                Text("Nome do cartão", color = Color(0xFF30323D))
                 OutlinedTextField(
                     value = text,
                     onValueChange = { text = it },
-                    label = { Text("Nome") },
+                    label = { Text("Nome", color = Color(0xFF30323D)) },
                     shape = RoundedCornerShape(5.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -119,20 +120,21 @@ fun CardScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Column(modifier = Modifier.weight(2f)) {
-                        Text("Número do cartão")
+                        Text("Número do cartão", color = Color(0xFF30323D))
                         OutlinedTextField(
                             value = text,
                             onValueChange = { text = it },
-                            label = { Text("Número") },
+                            label = { Text("Número", color = Color(0xFF30323D)) },
                             shape = RoundedCornerShape(5.dp),
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
 
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("CVV", fontSize = 14.sp)
+                        Text("CVV", fontSize = 14.sp, color = Color(0xFF30323D))
                         OutlinedTextField(
                             value = cvv,
+                            label = {( Text("000",color = Color(0xFF30323D)))},
                             onValueChange = { cvv = it },
                             shape = RoundedCornerShape(5.dp),
                             modifier = Modifier.fillMaxWidth().padding(top = 7.dp)
@@ -147,7 +149,7 @@ fun CardScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Column(modifier = Modifier.weight(2f)) {
-                        Text("Data de validade", fontSize = 14.sp)
+                        Text("Data de validade", fontSize = 14.sp, color = Color(0xFF30323D))
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             Box(modifier = Modifier.weight(1f)) {
                                 OutlinedButton(
@@ -155,7 +157,7 @@ fun CardScreen(navController: NavController) {
                                     modifier = Modifier.fillMaxWidth(),
                                     shape = RoundedCornerShape(5.dp),
                                     border = BorderStroke(1.dp, Color.Gray),
-                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF30323D))
                                 ) {
                                     Text(selectedMonth, modifier = Modifier.weight(1f))
                                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
@@ -179,9 +181,9 @@ fun CardScreen(navController: NavController) {
                                     modifier = Modifier.fillMaxWidth(),
                                     shape = RoundedCornerShape(5.dp),
                                     border = BorderStroke(1.dp, Color.Gray),
-                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF30323D))
                                 ) {
-                                    Text(selectedYear, modifier = Modifier.weight(1f))
+                                    Text(selectedYear, modifier = Modifier.weight(1f), color = Color(0xFF30323D))
                                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
                                 }
                                 DropdownMenu(
@@ -208,9 +210,9 @@ fun CardScreen(navController: NavController) {
                         .fillMaxWidth()
                         .height(48.dp),
                     shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(232, 197, 71))
                 ) {
-                    Text("Efetuar Pagamento", fontSize = 16.sp, color = Color.Black)
+                    Text("Efetuar Pagamento", fontSize = 16.sp, color = Color(0xFF30323D))
                 }
             }
         }

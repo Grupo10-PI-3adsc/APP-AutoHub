@@ -11,24 +11,53 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.appautohub.paginas.BemVindo.WelcomeScreen
+import com.example.appautohub.paginas.Cadastro.RegisterScreen
+import com.example.appautohub.paginas.Login.LoginScreen
+import com.example.appautohub.paginas.boleto.BoletoScreen
+import com.example.appautohub.paginas.card.CardScreen
 import com.example.appautohub.paginas.payment.PaymentScreen
+import com.example.appautohub.paginas.pix.Pix
 import com.example.appautohub.paginas.produtos.Products
 import com.example.appautohub.paginas.produtos.listaProdutos
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
-/* class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AppAutoHubTheme {
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PaymentScreen(modifier = Modifier.padding(innerPadding))
+                    NavHost(
+                        navController = navController,
+                        startDestination = "welcome",
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable("welcome") { WelcomeScreen(navController) }
+                        composable("login") { LoginScreen(navController) }
+                        composable("register") { RegisterScreen(navController) }
+                        composable("payment") { PaymentScreen(navController) }
+                        composable("pix") { Pix(navController) }
+                        composable("cartao") { CardScreen(navController) }
+                        composable("boleto") { BoletoScreen(navController) }
+                        composable("produtos" ) {
+                            Products(
+                                listaProdutos,
+                                navController = navController
+                            )
+                        }
+                    }
                 }
             }
         }
     }
-} */
+}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -41,9 +70,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Products(listaProdutos , modifier = Modifier.padding(innerPadding))
+            WelcomeScreen(navController = navController, modifier = Modifier.padding(innerPadding))
         }
     }
 }

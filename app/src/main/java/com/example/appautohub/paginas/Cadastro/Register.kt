@@ -1,5 +1,6 @@
 package com.example.appautohub.paginas.Cadastro
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,21 +22,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
+import com.example.appautohub.data.model.Usuario
+import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
 
 @Composable
-fun RegisterScreen(modifier: Modifier = Modifier) {
+fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) {
     val preto = Color(0xFF30323D)
     val cinza = Color(0xFF8B9EB7)
     val amarelo = Color(0xFFE8C547)
     val branco = Color(0xFFFFF9FB)
+    val viewModel = UsuarioViewModel()
+    val context = LocalContext.current
+
 
 
     Box(
@@ -73,6 +82,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     Text(
                         text = "Cadastro",
                         fontSize = 35.sp,
+                        color = Color(0xFF30323D),
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 8.dp, bottom = 20.dp)
                     )
@@ -85,7 +95,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     OutlinedTextField(
                         value = nome,
                         onValueChange = { nome = it },
-                        label = { Text("Nome") },
+                        label = { Text("Nome", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -93,7 +103,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     OutlinedTextField(
                         value = cpf,
                         onValueChange = { cpf = it },
-                        label = { Text("CPF") },
+                        label = { Text("CPF", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -101,7 +111,7 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     OutlinedTextField(
                         value = email,
                         onValueChange = { email = it },
-                        label = { Text("E-mail") },
+                        label = { Text("E-mail", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -109,20 +119,30 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
                     OutlinedTextField(
                         value = senha,
                         onValueChange = { senha = it },
-                        label = { Text("Senha") },
+                        label = { Text("Senha", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Botões
-                    Button(onClick = { /* Lógica de cadastro */ },
+                    Button(
+                        onClick = {
+                            val novoUsuario = Usuario(nome, cpf, email, senha)
+                            viewModel.cadastrarUsuario(novoUsuario) { sucesso ->
+                                if (sucesso) {
+                                    println("Usuário cadastrado com sucesso")
+                                } else {
+                                    println("Falha ao cadastrar usuário")
+                                }
+                            }
+                        },
                         modifier = Modifier.fillMaxWidth().height(60.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = amarelo)
-                    ){
+                    ) {
                         Text(text = "Fazer Cadastro", fontSize = 20.sp, color = preto)
                     }
+
                 }
             }
         }
@@ -132,9 +152,10 @@ fun RegisterScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     AppAutoHubTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            RegisterScreen(modifier = Modifier.padding(innerPadding))
+            RegisterScreen(navController, modifier = Modifier.padding(innerPadding))
         }
     }
 }

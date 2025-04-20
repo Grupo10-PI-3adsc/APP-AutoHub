@@ -20,10 +20,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.max
+import androidx.navigation.NavController
 import com.example.appautohub.classes.Produto
 
 @Composable
-fun Product(produto: Produto, modifier: Modifier = Modifier) {
+fun Product(produto: Produto, navController: NavController ,modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .width(180.dp)
@@ -72,7 +73,9 @@ fun Product(produto: Produto, modifier: Modifier = Modifier) {
                 )
 
                 Button(
-                    onClick = { /* Ação ao clicar no botão */ },
+                    onClick = {
+                        navController.navigate("payment")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         Color(48, 50, 62)
                     ),
