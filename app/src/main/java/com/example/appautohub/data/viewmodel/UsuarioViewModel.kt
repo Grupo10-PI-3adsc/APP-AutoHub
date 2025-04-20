@@ -35,7 +35,7 @@ class UsuarioViewModel : ViewModel() {
     fun loginUsuario(email: String, senha: String, onResult: (Boolean, LoginResponse?) -> Unit) {
         viewModelScope.launch {
             try {
-                val loginRequest = LoginRequest(email, senha)
+                val loginRequest = LoginRequest(email, password = senha)
                 val response = RetrofitInstance.api.login(loginRequest)
 
                 if (response.isSuccessful) {

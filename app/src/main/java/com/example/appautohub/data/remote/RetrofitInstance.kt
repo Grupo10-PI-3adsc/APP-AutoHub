@@ -15,7 +15,8 @@ object RetrofitInstance {
 
     val api: ApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.0.2:8080")  // <- baseUrl corrigida (emulador Android)
+            .baseUrl("http://10.0.2.2:8080")  // <- (emulador Android)
+            // .baseUrl("http://10.0.3.2:8080")  // <- (celular externo)
             .client(client) // <- adiciona o client com logging
             .addConverterFactory(GsonConverterFactory.create())
             .build()

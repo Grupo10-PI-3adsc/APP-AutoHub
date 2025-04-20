@@ -105,7 +105,7 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
 
                     Button(
                         onClick = {
-                            Toast.makeText(context, "Email: $email\nSenha: $senha", Toast.LENGTH_SHORT).show()
+
 
                             viewModel.loginUsuario(email, senha) { sucesso, usuario ->
                                 if (sucesso) {
