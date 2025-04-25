@@ -110,7 +110,7 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navCont
                     ) {
                         Text(
                             "Cancelar",
-                            color = Color.Black,
+                            color = Color(0xFF30323D),
                             fontSize = 15.sp)
                     }
                 }

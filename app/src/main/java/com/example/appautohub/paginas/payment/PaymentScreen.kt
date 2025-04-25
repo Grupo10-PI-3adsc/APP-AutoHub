@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -80,12 +81,17 @@ fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
                         contentDescription = "Ícone de pagamento",
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(method, fontSize = 16.sp)
+                    Text(method, fontSize = 16.sp, color = Color(0xFF30323D))
                     Spacer(modifier = Modifier.weight(1f))
                     RadioButton(
                         selected = selectedMethod == index,
+                        colors = RadioButtonDefaults.colors(
+                            selectedColor = Color(0xFF30323D),
+                            unselectedColor = Color(0xFF30323D)
+                        ),
                         onClick = null // Remove a necessidade de clique aqui, já que o `Row` é clicável
                     )
+
                 }
             }
         }
@@ -95,14 +101,14 @@ fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
         ) {
-            Text("ITENS:", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text("ITENS:", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(0xFF30323D))
             items.forEach { item ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(item.first, fontSize = 14.sp)
-                    Text("R$%.2f".format(item.second), fontSize = 14.sp)
+                    Text(item.first, fontSize = 14.sp, color = Color(0xFF30323D))
+                    Text("R$%.2f".format(item.second), fontSize = 14.sp, color = Color(0xFF30323D))
                 }
             }
 
@@ -112,8 +118,8 @@ fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("Total", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                Text("R$%.2f".format(total), fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                Text("Total", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(0xFF30323D))
+                Text("R$%.2f".format(total), fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(0xFF30323D))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -130,9 +136,9 @@ fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .height(48.dp),
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
+                colors = ButtonDefaults.buttonColors(containerColor = Color(232, 197, 71))
             ) {
-                Text("Prosseguir", fontSize = 16.sp, color = Color.Black)
+                Text("Prosseguir", fontSize = 16.sp, color = Color(0xFF30323D))
             }
 
         }

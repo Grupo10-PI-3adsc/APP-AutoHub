@@ -1,14 +1,18 @@
 package com.example.appautohub.ui.theme.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -23,31 +27,68 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.appautohub.R
+import com.example.appautohub.data.model.Usuario
+import com.example.appautohub.data.viewmodel.UsuarioViewModel
+import org.koin.compose.koinInject
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun HeaderApp(navController: NavController?) {
+    val viewModel = koinInject<UsuarioViewModel>()
+    val userProfile = viewModel.loginResponse
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
             .background(Color.DarkGray)
-            .padding(0.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 20.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        // Logo no canto esquerdo
         Image(
             modifier = Modifier
-                .padding(start = 20.dp)
+                .size(40.dp)
                 .clickable {
-                    // Verifica se o NavController não é nulo e se há tela anterior
                     navController?.popBackStack()
                 },
             painter = painterResource(id = R.drawable.lotus),
             contentDescription = "Logo lotus"
         )
+
+        // Bloco com imagem de perfil + nome do usuário no canto direito
+        if (userProfile != null) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clickable {
+                            // ação do botão de perfil
+                        },
+                    painter = painterResource(id = R.drawable.profile),
+                    contentDescription = "Perfil"
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = userProfile.nome,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
+        }
     }
 }
+
+
 @Composable
 fun HeaderTitle(title: String) {
     Box(
@@ -71,6 +112,7 @@ fun HeaderTitle(title: String) {
             text = title,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
+            color = Color(0xFF30323D),
             modifier = Modifier.align(Alignment.Center) // Centraliza o título independentemente do ícone
         )
     }

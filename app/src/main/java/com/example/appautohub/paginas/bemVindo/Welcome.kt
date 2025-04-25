@@ -1,4 +1,4 @@
-package com.example.appautohub.paginas.BemVindo
+package com.example.appautohub.paginas.bemVindo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -75,13 +75,15 @@ fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
                     Text(
                         text = "Bem vindo!",
                         fontSize = 30.sp,
-                        modifier = Modifier.padding(top = 16.dp, bottom = 10.dp)
+                        modifier = Modifier.padding(top = 16.dp, bottom = 10.dp),
+                        color = Color.Black
                     )
 
                     Text(
                         text = "Encontre o melhor autocenter para sua necessidade.",
                         fontSize = 20.sp,
-                        modifier = Modifier.padding(vertical = 8.dp)
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        color = Color.Black
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
@@ -97,7 +99,7 @@ fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
                             Text(text = "Login", fontSize = 16.sp, color = branco)
                         }
                         Button(
-                            onClick = { navController.navigate("cadastro") },
+                            onClick = { navController.navigate("register") },
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(containerColor = amarelo)
                         ) {

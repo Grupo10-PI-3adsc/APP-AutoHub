@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="94af7fc8-365c-4b34-90d1-b233dd4aea0d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/BemVindo/Welcome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/BemVindo/Welcome.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/Cadastro/Register.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/Cadastro/Register.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/Login/Login.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/Login/Login.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/boleto/BoletoScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/boleto/BoletoScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/card/CardScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/card/CardScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/payment/PaymentScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/payment/PaymentScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/pix/Pix.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/pix/Pix.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/produtos/Products.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/paginas/produtos/Products.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/ui/theme/AppNavigation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/ui/theme/AppNavigation.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appautohub/ui/theme/components/Product.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/appautohub/ui/theme/components/Product.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2uSsTifmaAOiVQM4AtRfCUnleBQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "PaymentNavigation"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94af7fc8-365c-4b34-90d1-b233dd4aea0d" name="Changes" comment="" />
+      <created>1742253321742</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742253321742</updated>
+    </task>
+    <servers />
+  </component>
+</project>
