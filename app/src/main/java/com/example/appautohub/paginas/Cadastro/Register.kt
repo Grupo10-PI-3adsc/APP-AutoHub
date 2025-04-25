@@ -1,5 +1,6 @@
 package com.example.appautohub.paginas.Cadastro
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,8 +11,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +34,7 @@ import com.example.appautohub.data.model.Usuario
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
-
+@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) {
     val preto = Color(0xFF30323D)
@@ -44,8 +43,6 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
     val branco = Color(0xFFFFF9FB)
     val viewModel = UsuarioViewModel()
     val context = LocalContext.current
-
-
 
     Box(
         modifier = Modifier
@@ -72,7 +69,7 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                     .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
                     .background(branco)
                     .padding(24.dp)
-                    .height(500.dp),
+                    .height(580.dp), // aumentamos um pouco a altura para o novo campo
                 contentAlignment = Alignment.Center
             ) {
                 Column(
@@ -90,6 +87,7 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                     var nome by remember { mutableStateOf("") }
                     var email by remember { mutableStateOf("") }
                     var cpf by remember { mutableStateOf("") }
+                    var telefone by remember { mutableStateOf("") } // novo campo
                     var senha by remember { mutableStateOf("") }
 
                     OutlinedTextField(
@@ -104,6 +102,14 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         value = cpf,
                         onValueChange = { cpf = it },
                         label = { Text("CPF", color = Color(0xFF30323D)) },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+
+                    OutlinedTextField(
+                        value = telefone,
+                        onValueChange = { telefone = it },
+                        label = { Text("Telefone", color = Color(0xFF30323D)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -124,16 +130,17 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         shape = RoundedCornerShape(12.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     Button(
                         onClick = {
-                            val novoUsuario = Usuario(nome, cpf, email, senha)
+                            val novoUsuario = Usuario(nome, cpfCnpj = cpf, email, password = senha, telefone)
                             viewModel.cadastrarUsuario(novoUsuario) { sucesso ->
                                 if (sucesso) {
-                                    println("Usuário cadastrado com sucesso")
+                                    Toast.makeText(context, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
+                                    navController.navigate("login") // opcional: navegar após cadastro
                                 } else {
-                                    println("Falha ao cadastrar usuário")
+                                    Toast.makeText(context, "Falha ao cadastrar usurious", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         },
@@ -142,7 +149,6 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                     ) {
                         Text(text = "Fazer Cadastro", fontSize = 20.sp, color = preto)
                     }
-
                 }
             }
         }

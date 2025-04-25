@@ -14,15 +14,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.appautohub.paginas.BemVindo.WelcomeScreen
 import com.example.appautohub.paginas.Cadastro.RegisterScreen
+import com.example.appautohub.paginas.bemVindo.WelcomeScreen
 import com.example.appautohub.paginas.Login.LoginScreen
 import com.example.appautohub.paginas.boleto.BoletoScreen
 import com.example.appautohub.paginas.card.CardScreen
 import com.example.appautohub.paginas.payment.PaymentScreen
 import com.example.appautohub.paginas.pix.Pix
 import com.example.appautohub.paginas.produtos.Products
-import com.example.appautohub.paginas.produtos.listaProdutos
+import com.example.appautohub.paginas.produtos.ProdutoExpandido
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,10 +47,10 @@ class MainActivity : ComponentActivity() {
                         composable("boleto") { BoletoScreen(navController) }
                         composable("produtos" ) {
                             Products(
-                                listaProdutos,
                                 navController = navController
                             )
                         }
+                        composable("produtoExpandido") { ProdutoExpandido(navController) }
                     }
                 }
             }

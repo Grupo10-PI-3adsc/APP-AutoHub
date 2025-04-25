@@ -15,21 +15,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
-import com.example.appautohub.ui.theme.AppAutoHubTheme
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
-    var email by remember { mutableStateOf("") }
-    var senha by remember { mutableStateOf("") }
-    val viewModel = remember { UsuarioViewModel() }
+    var email by remember { mutableStateOf("ana.paula@example.com") }
+    var senha by remember { mutableStateOf("SenhaSegura456") }
+    val viewModel = koinInject<UsuarioViewModel>()
     val context = LocalContext.current
 
     val preto = Color(0xFF30323D)
@@ -107,14 +105,16 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
                         onClick = {
 
 
-                            viewModel.loginUsuario(email, senha) { sucesso, usuario ->
+                            viewModel.loginUsuario(email, senha) { sucesso ->
                                 if (sucesso) {
-                                    Toast.makeText(context, "Token: ${usuario?.token}", Toast.LENGTH_LONG).show()
+                                    val token = viewModel.loginResponse?.token
+                                    Toast.makeText(context, "Token: $token", Toast.LENGTH_LONG).show()
                                     navController.navigate("produtos")
                                 } else {
                                     Toast.makeText(context, "Login falhou", Toast.LENGTH_SHORT).show()
                                 }
                             }
+
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -130,11 +130,3 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun LoginScreenPreview() {
-//    val navController = rememberNavController()
-//    AppAutoHubTheme {
-//        LoginScreen(navController)
-//    }
-//}

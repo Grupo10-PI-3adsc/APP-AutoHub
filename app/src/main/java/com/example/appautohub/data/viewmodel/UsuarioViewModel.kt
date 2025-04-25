@@ -1,8 +1,9 @@
 package com.example.appautohub.data.viewmodel
 
 
-import android.util.Log
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appautohub.data.model.LoginRequest
@@ -32,29 +33,29 @@ class UsuarioViewModel : ViewModel() {
         }
     }
 
-    fun loginUsuario(email: String, senha: String, onResult: (Boolean, LoginResponse?) -> Unit) {
+    var loginResponse by mutableStateOf<LoginResponse?>(null)
+        private set
+
+    fun loginUsuario(email: String, senha: String, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             try {
                 val loginRequest = LoginRequest(email, password = senha)
                 val response = RetrofitInstance.api.login(loginRequest)
 
                 if (response.isSuccessful) {
-                    val token = response.body()?.token
-                    println("Login bem-sucedido! Token: $token")
-                    onResult(true, response.body())
+                    loginResponse = response.body() // <- Aqui você armazena!
+                    println("Login bem-sucedido! Token: ${loginResponse?.token}")
+                    onResult(true)
                 } else {
                     val erro = response.errorBody()?.string()
                     println("Erro no login: ${response.code()} - $erro")
-                    onResult(false, null)
+                    onResult(false)
                 }
             } catch (e: Exception) {
                 println("Exceção no login: ${e.message}")
-                e.printStackTrace() // Mostra o stacktrace no Logcat
-                onResult(false, null)
+                onResult(false)
             }
         }
     }
-
-
 }
 

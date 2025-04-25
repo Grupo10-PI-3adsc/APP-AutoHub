@@ -2,10 +2,12 @@ package com.example.appautohub.data.remote
 
 import com.example.appautohub.data.model.LoginRequest
 import com.example.appautohub.data.model.LoginResponse
+import com.example.appautohub.data.model.Produto
 import com.example.appautohub.data.model.Usuario
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.Response
+import retrofit2.http.GET
 
 interface ApiService {
 
@@ -14,4 +16,8 @@ interface ApiService {
 
     @POST("/auth/login")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+
+    @GET("/produtos/listar-produtos")
+    suspend fun getProdutos(): Response<List<Produto>>
+
 }
