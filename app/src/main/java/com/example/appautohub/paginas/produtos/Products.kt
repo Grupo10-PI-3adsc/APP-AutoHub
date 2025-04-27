@@ -57,7 +57,7 @@ fun Products(
         HeaderApp(navController)
 
         Spacer(modifier = Modifier.height(16.dp))
-        HeaderTitle("PRODUTOS")
+        HeaderTitle("PRODUTOS", navController)
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(

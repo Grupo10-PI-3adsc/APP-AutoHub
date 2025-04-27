@@ -96,10 +96,10 @@ fun PerfilScreen(navController: NavController) {
                     PerfilInfo(label = "Email", valor = usuarioLogado.email)
                     PerfilInfo(label = "Telefone", valor = usuarioLogado.telefone)
                     PerfilInfo(label = "CPF", valor = usuarioLogado.cpfCnpj)
-                    PerfilInfo(label = "Cidade", valor = usuarioLogado.localidade ?: "Não informado")
-                    PerfilInfo(label = "Estado", valor = usuarioLogado.uf ?: "Não informado")
-                    PerfilInfo(label = "Bairro", valor = usuarioLogado.bairro ?: "Não informado")
-                    PerfilInfo(label = "CEP", valor = usuarioLogado.cep ?: "Não informado")
+                    PerfilInfo(label = "Cidade", valor = (usuarioLogado.endereco.localidade ?: "Não informado").toString())
+                    PerfilInfo(label = "Estado", valor = usuarioLogado.endereco.uf ?: "Não informado")
+                    PerfilInfo(label = "Bairro", valor = usuarioLogado.endereco.bairro ?: "Não informado")
+                    PerfilInfo(label = "CEP", valor = usuarioLogado.endereco.cep ?: "Não informado")
                 }
             } else {
                 Text(

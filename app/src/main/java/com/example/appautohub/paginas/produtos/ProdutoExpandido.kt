@@ -94,7 +94,7 @@ fun ProdutoExpandido(navController: NavController) {
                         contentScale = ContentScale.Crop
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
                     // Nome e preço
                     Text(
@@ -103,18 +103,19 @@ fun ProdutoExpandido(navController: NavController) {
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
                     Text(
                         text = "R$ %.2f".format(productSelect.preco),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.Black
                     )
-                    Spacer(modifier = Modifier.height(3.dp))
 
                     Text(
-                        text = "R$ %.2f".format(productSelect.preco / 10) + "em 10x",
-                        fontSize = 5.sp,
+                        text = "R$ %.2f".format(productSelect.preco / 10) + " em 10x",
+                        fontSize = 10.sp,
                         color = Color.Black,
                         textAlign = TextAlign.Center
                     )
