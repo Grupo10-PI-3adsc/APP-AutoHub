@@ -62,7 +62,7 @@ fun PaymentScreen(navController: NavController, modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            HeaderTitle("MÉTODO DE PAGAMENTO")
+            HeaderTitle("MÉTODO DE PAGAMENTO", navController)
 
             Spacer(modifier = Modifier.height(16.dp))
 

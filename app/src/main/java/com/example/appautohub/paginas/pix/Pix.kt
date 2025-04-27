@@ -61,7 +61,7 @@ fun Pix(navController: NavController, modifier: Modifier = Modifier){
     {
         HeaderApp(navController)
         Spacer(modifier = Modifier.height(16.dp))
-        HeaderTitle("PIX")
+        HeaderTitle("PIX", navController)
         Spacer(modifier = Modifier.height(16.dp))
         Column(
             modifier = Modifier

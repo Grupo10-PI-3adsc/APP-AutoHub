@@ -82,7 +82,7 @@ fun CardScreen(navController: NavController) {
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
 
-                HeaderTitle("ADICIONAR CARTÃO")
+                HeaderTitle("ADICIONAR CARTÃO", navController)
 
                 Spacer(modifier = Modifier.height(50.dp))
 

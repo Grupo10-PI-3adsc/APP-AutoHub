@@ -25,7 +25,7 @@ import org.koin.compose.koinInject
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
-    var email by remember { mutableStateOf("victor2@adm.com") }
+    var email by remember { mutableStateOf("leonardo@adm.com") }
     var senha by remember { mutableStateOf("senha123") }
     val viewModel = koinInject<UsuarioViewModel>()
     val context = LocalContext.current

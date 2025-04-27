@@ -58,7 +58,7 @@ fun BoletoScreen(navController: NavController) {
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
 
-                HeaderTitle("BOLETO")
+                HeaderTitle("BOLETO", navController)
 
                 Spacer(modifier = Modifier.height(32.dp))
 

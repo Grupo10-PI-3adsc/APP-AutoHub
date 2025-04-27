@@ -50,7 +50,7 @@ fun PedidoScreen(navController: NavController){
     ) {
         HeaderApp(navController)
         Spacer(modifier = Modifier.height(16.dp))
-        HeaderTitle("PEDIDOS")
+        HeaderTitle("PEDIDOS", navController)
         Spacer(modifier = Modifier.height(16.dp))
 
         LazyVerticalGrid(
