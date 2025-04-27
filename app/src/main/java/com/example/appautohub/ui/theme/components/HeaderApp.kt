@@ -71,7 +71,20 @@ fun HeaderApp(navController: NavController?) {
             ) {
                 Image(
                     modifier = Modifier
-                        .size(40.dp),
+                        .size(40.dp)
+                        .clickable {
+                            navController?.navigate("carrinho")
+                        },
+                    painter = painterResource(id = R.drawable.carrinho),
+                    contentDescription = "Carrinho"
+                )
+
+                Image(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clickable {
+                            navController?.navigate("perfil")
+                        },
                     painter = painterResource(id = R.drawable.profile),
                     contentDescription = "Perfil"
                 )
@@ -82,7 +95,11 @@ fun HeaderApp(navController: NavController?) {
                     text = userProfile.nome,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.White,
+                    modifier = Modifier
+                        .clickable {
+                            navController?.navigate("perfil")
+                        }
                 )
             }
         }

@@ -1,5 +1,6 @@
 package com.example.appautohub.ui.theme
 
+import CartScreen
 import android.provider.ContactsContract.Profile
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
@@ -32,6 +33,7 @@ fun AppNavigator() {
         composable("cartao") { CardScreen(navController) }
         composable("boleto") { BoletoScreen(navController) }
         composable("produtos" ) { Products(navController = navController) }
+        composable("carrinho") { CartScreen(navController)}
         composable("perfil") { PerfilScreen(navController) }
         composable("pedidos") { PedidoScreen(navController)}
     }
