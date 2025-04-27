@@ -63,7 +63,11 @@ fun HeaderApp(navController: NavController?) {
         // Bloco com imagem de perfil + nome do usuário no canto direito
         if (userProfile != null) {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clickable {
+                        navController?.navigate("perfil")
+                    }
             ) {
                 Image(
                     modifier = Modifier

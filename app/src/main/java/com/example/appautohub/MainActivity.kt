@@ -21,6 +21,8 @@ import com.example.appautohub.paginas.Login.LoginScreen
 import com.example.appautohub.paginas.boleto.BoletoScreen
 import com.example.appautohub.paginas.card.CardScreen
 import com.example.appautohub.paginas.payment.PaymentScreen
+import com.example.appautohub.paginas.pedidos.PedidoScreen
+import com.example.appautohub.paginas.perfil.PerfilScreen
 import com.example.appautohub.paginas.pix.Pix
 import com.example.appautohub.paginas.produtos.Products
 import com.example.appautohub.paginas.produtos.ProdutoExpandido
@@ -53,6 +55,8 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("produtoExpandido") { ProdutoExpandido(navController) }
                         composable("carrinho") { CartScreen(navController)}
+                        composable("perfil") { PerfilScreen(navController) }
+                        composable("pedidos") { PedidoScreen(navController) }
                     }
                 }
             }
