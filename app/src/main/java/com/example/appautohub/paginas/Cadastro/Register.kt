@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +37,7 @@ import com.example.appautohub.data.model.Usuario
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.ui.theme.AppAutoHubTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) {
@@ -94,6 +98,10 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         value = nome,
                         onValueChange = { nome = it },
                         label = { Text("Nome", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -102,6 +110,10 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         value = cpf,
                         onValueChange = { cpf = it },
                         label = { Text("CPF", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -110,6 +122,10 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         value = telefone,
                         onValueChange = { telefone = it },
                         label = { Text("Telefone", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -118,6 +134,10 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         value = email,
                         onValueChange = { email = it },
                         label = { Text("E-mail", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -126,6 +146,10 @@ fun RegisterScreen(navController: NavController, modifier: Modifier = Modifier) 
                         value = senha,
                         onValueChange = { senha = it },
                         label = { Text("Senha", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
