@@ -15,11 +15,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.appautohub.R
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
+import com.example.appautohub.ui.theme.AppAutoHubTheme
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,6 +83,10 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
                         value = email,
                         onValueChange = { email = it },
                         label = { Text("Email", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -88,6 +95,10 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
                         value = senha,
                         onValueChange = { senha = it },
                         label = { Text("Senha", color = Color(0xFF30323D)) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = preto,
+                            unfocusedTextColor = preto,
+                        ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -129,4 +140,3 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
         }
     }
 }
-
