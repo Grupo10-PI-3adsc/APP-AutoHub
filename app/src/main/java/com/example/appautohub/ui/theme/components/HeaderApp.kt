@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -63,13 +64,27 @@ fun HeaderApp(navController: NavController?) {
         // Bloco com imagem de perfil + nome do usuário no canto direito
         if (userProfile != null) {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clickable {
+                        navController?.navigate("perfil")
+                    }
             ) {
                 Image(
                     modifier = Modifier
                         .size(40.dp)
                         .clickable {
-                            // ação do botão de perfil
+                            navController?.navigate("carrinho")
+                        },
+                    painter = painterResource(id = R.drawable.carrinho),
+                    contentDescription = "Carrinho"
+                )
+
+                Image(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clickable {
+                            navController?.navigate("perfil")
                         },
                     painter = painterResource(id = R.drawable.profile),
                     contentDescription = "Perfil"
@@ -81,7 +96,11 @@ fun HeaderApp(navController: NavController?) {
                     text = userProfile.nome,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.White,
+                    modifier = Modifier
+                        .clickable {
+                            navController?.navigate("perfil")
+                        }
                 )
             }
         }
@@ -90,23 +109,26 @@ fun HeaderApp(navController: NavController?) {
 
 
 @Composable
-fun HeaderTitle(title: String) {
+fun HeaderTitle(title: String, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
 
-        Button(
-            onClick = { },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            modifier = Modifier.align(Alignment.CenterStart) // Mantém o botão fixo à esquerda
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp),
+            horizontalArrangement = Arrangement.Start
         ) {
-            Icon(
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "Voltar",
-                tint = Color.Black
-            )
+            IconButton(onClick = { navController.popBackStack() }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Voltar",
+                    tint = Color.Black
+                )
+            }
         }
         Text(
             text = title,

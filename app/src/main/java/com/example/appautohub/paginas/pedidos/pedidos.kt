@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -29,21 +30,11 @@ import com.example.appautohub.ui.theme.AppAutoHubTheme
 import com.example.appautohub.ui.theme.components.HeaderTitle
 import com.example.appautohub.ui.theme.components.Product
 
-var oleoImage = R.drawable.oleo
-
-
-val listaProdutos = listOf(
-    Produto("Óleo para Motor", oleoImage, 49.90, "Óleo sintético 5W30 para motores."),
-    Produto("Pneu Aro 15", oleoImage, 399.99, "Pneu de alta durabilidade para carros."),
-    Produto("Filtro de Ar", oleoImage, 29.90, "Filtro de ar para melhor desempenho do motor."),
-    Produto("Pastilha de Freio", oleoImage, 99.90, "Pastilha de freio para segurança no trânsito."),
-    Produto("Bateria 60Ah", oleoImage, 499.90, "Bateria automotiva de longa duração.")
-)
 
 @Composable
-fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navController: NavController){
+fun PedidoScreen(navController: NavController){
 
-    val headers = listOf("Tipo", "Data", "Produtos", "Valor", "")
+    val headers = listOf("Tipo", "Data", "Prod.", "Valor", "")
     val itemsList = listOf(
         listOf("M. de obra", "01/01/2025", "2x Óleo", "R$ 50,00"),
         listOf("M. de obra", "02/01/2025", "3x Óleo ", "R$ 30,00"),
@@ -51,38 +42,45 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navCont
         listOf("M. de obra", "04/01/2025", "1x Óleo ", "R$ 90,00"),
         listOf("M. de obra", "05/01/2025", "5x Óleo ", "R$ 120,00")
     )
+
     Column (
         modifier = Modifier
             .fillMaxSize()
             .background(Color(245, 240, 242))
-    )
-    {
+    ) {
         HeaderApp(navController)
         Spacer(modifier = Modifier.height(16.dp))
-        HeaderTitle("PEDIDOS")
+        HeaderTitle("PEDIDOS", navController)
         Spacer(modifier = Modifier.height(16.dp))
 
         LazyVerticalGrid(
-            columns = GridCells.Fixed(1), // 4 colunas
+            columns = GridCells.Fixed(1),
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(horizontal = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(0.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     headers.forEach { header ->
                         Text(
                             text = header,
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
-                            modifier = Modifier.weight(1f)
+                            color = Color(0xFF30323E),
+                            modifier = Modifier
+                                .padding(horizontal = 11.dp), // Espaçamento para ajustar a separação
+                            textAlign = TextAlign.Start // Alinhamento à esquerda
                         )
                     }
                 }
             }
+
 
             items(itemsList) { item ->
                 Row(
@@ -97,36 +95,24 @@ fun Products(listaProdutos:List<Produto>, modifier: Modifier = Modifier, navCont
                         Text(
                             text = data,
                             fontSize = 16.sp,
-                            modifier = Modifier
-                                .weight(1f)
-
-                            )
+                            color = Color(0xFF30323E), // Cor aplicada
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                     Button(
                         onClick = { /* Ação ao clicar no botão */ },
                         colors = ButtonDefaults.buttonColors(
-                            Color(220, 187, 69)
+                            containerColor = Color(0xFFDDBB45)
                         ),
                     ) {
                         Text(
                             "Cancelar",
                             color = Color(0xFF30323D),
-                            fontSize = 15.sp)
+                            fontSize = 15.sp
+                        )
                     }
                 }
             }
-        }
-
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    val navController = rememberNavController()
-    AppAutoHubTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Products(listaProdutos , modifier = Modifier.padding(innerPadding), navController)
         }
     }
 }
