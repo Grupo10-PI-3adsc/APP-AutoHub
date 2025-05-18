@@ -24,6 +24,7 @@ import com.example.appautohub.paginas.payment.PaymentScreen
 import com.example.appautohub.paginas.pedidos.PedidoScreen
 import com.example.appautohub.paginas.perfil.PerfilScreen
 import com.example.appautohub.paginas.pix.Pix
+import com.example.appautohub.paginas.produtos.AllProdutos
 import com.example.appautohub.paginas.produtos.Products
 import com.example.appautohub.paginas.produtos.ProdutoExpandido
 import com.example.appautohub.ui.theme.AppAutoHubTheme
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
                         composable("payment") { PaymentScreen(navController) }
                         composable("pix") { Pix(navController) }
                         composable("cartao") { CardScreen(navController) }
+                        composable("allprodutos" ) { AllProdutos(navController) }
                         composable("boleto") { BoletoScreen(navController) }
                         composable("produtos" ) {
                             Products(

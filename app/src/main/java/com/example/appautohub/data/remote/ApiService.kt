@@ -11,13 +11,13 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @POST("/auth/register")
+    @POST("/api/auth/register")
     suspend fun cadastrar(@Body usuario: Usuario): Response<Usuario> // ou o DTO certo se necessário
 
-    @POST("/auth/login")
+    @POST("/api/auth/login")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    @GET("/produtos/listar-produtos")
+    @GET("/api/produtos/listar-produtos")
     suspend fun getProdutos(): Response<List<Produto>>
 
 }

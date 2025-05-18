@@ -17,6 +17,7 @@ import com.example.appautohub.paginas.payment.PaymentScreen
 import com.example.appautohub.paginas.pedidos.PedidoScreen
 import com.example.appautohub.paginas.perfil.PerfilScreen
 import com.example.appautohub.paginas.pix.Pix
+import com.example.appautohub.paginas.produtos.AllProdutos
 import com.example.appautohub.paginas.produtos.Products
 
 @Composable
@@ -33,6 +34,7 @@ fun AppNavigator() {
         composable("cartao") { CardScreen(navController) }
         composable("boleto") { BoletoScreen(navController) }
         composable("produtos" ) { Products(navController = navController) }
+        composable("allprodutos" ) { AllProdutos(navController) }
         composable("carrinho") { CartScreen(navController)}
         composable("perfil") { PerfilScreen(navController) }
         composable("pedidos") { PedidoScreen(navController)}

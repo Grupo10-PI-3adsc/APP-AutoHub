@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -33,6 +34,7 @@ import androidx.navigation.NavController
 import com.example.appautohub.R
 import com.example.appautohub.data.model.Usuario
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
+import com.example.appautohub.paginas.produtos.Products
 import org.koin.compose.koinInject
 
 @SuppressLint("ViewModelConstructorInComposable")
@@ -55,7 +57,7 @@ fun HeaderApp(navController: NavController?) {
             modifier = Modifier
                 .size(40.dp)
                 .clickable {
-                    navController?.popBackStack()
+                    navController?.navigate("produtos")
                 },
             painter = painterResource(id = R.drawable.lotus),
             contentDescription = "Logo lotus"
@@ -108,8 +110,9 @@ fun HeaderApp(navController: NavController?) {
 }
 
 
+
 @Composable
-fun HeaderTitle(title: String, navController: NavController) {
+fun HeaderTitle2(title: String, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -120,11 +123,11 @@ fun HeaderTitle(title: String, navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 8.dp),
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.End
         ) {
-            IconButton(onClick = { navController.popBackStack() }) {
+            IconButton(onClick = { navController.navigate("allprodutos") }) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.Default.ArrowForward,
                     contentDescription = "Voltar",
                     tint = Color.Black
                 )
@@ -137,5 +140,38 @@ fun HeaderTitle(title: String, navController: NavController) {
             color = Color(0xFF30323D),
             modifier = Modifier.align(Alignment.Center) // Centraliza o título independentemente do ícone
         )
+    }
+}
+
+
+@Composable
+fun HeaderTitle(title: String, navController: NavController) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ) {
+        Text(
+            text = title,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF30323D),
+            modifier = Modifier.align(Alignment.Center) // Centraliza o título independentemente do ícone
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            IconButton(onClick = { navController.navigate("produtos") }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Voltar",
+                    tint = Color.Black
+                )
+            }
+        }
+
     }
 }
