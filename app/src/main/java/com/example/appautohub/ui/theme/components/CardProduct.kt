@@ -22,11 +22,10 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.appautohub.data.model.Produto
 import com.example.appautohub.data.viewmodel.ProdutoViewModel
-import com.example.appautohub.paginas.produtos.ProdutoExpandido
 import org.koin.compose.koinInject
 
 @Composable
-fun Product(produto: Produto, navController: NavController, modifier: Modifier = Modifier) {
+fun CardProduct(produto: Produto, navController: NavController, modifier: Modifier = Modifier) {
     var isExpanded by remember { mutableStateOf(false) }
     var produtoSelection = koinInject<ProdutoViewModel>()
 

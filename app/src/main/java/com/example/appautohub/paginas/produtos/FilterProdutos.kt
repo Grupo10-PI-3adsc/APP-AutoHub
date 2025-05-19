@@ -16,9 +16,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.appautohub.data.viewmodel.ProdutoViewModel
+import com.example.appautohub.ui.theme.components.BottomNavigationBar
 import com.example.appautohub.ui.theme.components.HeaderApp
 import com.example.appautohub.ui.theme.components.HeaderTitle
-import com.example.appautohub.ui.theme.components.Product
+import com.example.appautohub.ui.theme.components.CardProduct
 
 @Composable
 fun AllProdutos(
@@ -27,16 +28,9 @@ fun AllProdutos(
 ) {
     val listaProdutos by viewModel.produtos.collectAsState()
 
-    // Pegando categorias únicas dos produtos
     val categorias = listaProdutos.map { it.categoria }.distinct()
-
-    // Estado para controlar qual categoria está selecionada
     var categoriaSelecionadaIndex by remember { mutableStateOf(0) }
-
-    // Pegar categoria atual com segurança
     val categoriaSelecionada = categorias.getOrNull(categoriaSelecionadaIndex) ?: ""
-
-    // Filtrando produtos pela categoria atual
     val produtosFiltrados = listaProdutos.filter { it.categoria == categoriaSelecionada }
 
     Column(
@@ -89,13 +83,15 @@ fun AllProdutos(
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .weight(1f) // <-- Faz o grid expandir para ocupar o espaço disponível
+                .padding(horizontal = 8.dp)
         ) {
             items(produtosFiltrados) { produto ->
-                Product(produto = produto, navController)
+                CardProduct(produto = produto, navController)
             }
         }
+
+        BottomNavigationBar(navController = navController) // Barra fixa embaixo
     }
 }
-
-
