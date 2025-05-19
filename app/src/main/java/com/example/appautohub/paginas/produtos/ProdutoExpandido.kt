@@ -1,5 +1,6 @@
 package com.example.appautohub.paginas.produtos
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -20,14 +21,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.appautohub.data.viewmodel.CarrinhoViewModel
 import com.example.appautohub.data.viewmodel.ProdutoViewModel
 import org.koin.compose.koinInject
+
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProdutoExpandido(navController: NavController) {
+
+
     val produto = koinInject<ProdutoViewModel>()
     val productSelect = produto.produtoSelecionado
+    val carrinhoViewModel = koinInject<CarrinhoViewModel>()
+
 
     if (productSelect != null) {
         Box(
@@ -46,7 +55,10 @@ fun ProdutoExpandido(navController: NavController) {
                 containerColor = Color.White,
                 bottomBar = {
                     Button(
-                        onClick = { /* Ação para adicionar ao carrinho */ },
+                        onClick = {
+                            Log.d("ProdutoExpandido", "Adicionando produto: $productSelect")
+                            carrinhoViewModel.adicionarProduto(productSelect)
+                        },
                         shape = RoundedCornerShape(50),
                         modifier = Modifier
                             .fillMaxWidth()

@@ -1,6 +1,5 @@
 package com.example.appautohub
 
-import CartScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,6 +19,7 @@ import com.example.appautohub.paginas.bemVindo.WelcomeScreen
 import com.example.appautohub.paginas.Login.LoginScreen
 import com.example.appautohub.paginas.boleto.BoletoScreen
 import com.example.appautohub.paginas.card.CardScreen
+import com.example.appautohub.paginas.carrinho.CartScreen
 import com.example.appautohub.paginas.payment.PaymentScreen
 import com.example.appautohub.paginas.pedidos.PedidoScreen
 import com.example.appautohub.paginas.perfil.PerfilScreen
@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("produtoExpandido") { ProdutoExpandido(navController) }
-                        composable("carrinho") { CartScreen(navController)}
+                        composable("carrinho") {CartScreen(navController) }
                         composable("perfil") { PerfilScreen(navController) }
                         composable("pedidos") { PedidoScreen(navController) }
                     }

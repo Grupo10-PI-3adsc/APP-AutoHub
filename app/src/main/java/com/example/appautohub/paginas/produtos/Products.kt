@@ -11,8 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.appautohub.data.viewmodel.CarrinhoViewModel
 import com.example.appautohub.data.viewmodel.ProdutoViewModel
 import com.example.appautohub.ui.theme.components.*
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
@@ -22,6 +24,7 @@ fun Products(
     viewModel: ProdutoViewModel = viewModel()
 ) {
     val listaProdutos by viewModel.produtos.collectAsState()
+    val carrinhoViewModel: CarrinhoViewModel = koinViewModel()
 
     Column(
         modifier = modifier

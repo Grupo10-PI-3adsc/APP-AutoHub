@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -29,12 +27,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.appautohub.R
-import com.example.appautohub.data.model.Usuario
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
-import com.example.appautohub.paginas.produtos.Products
 import org.koin.compose.koinInject
 
 @SuppressLint("ViewModelConstructorInComposable")
@@ -72,15 +67,6 @@ fun HeaderApp(navController: NavController?) {
                         navController?.navigate("perfil")
                     }
             ) {
-                Image(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clickable {
-                            navController?.navigate("carrinho")
-                        },
-                    painter = painterResource(id = R.drawable.carrinho),
-                    contentDescription = "Carrinho"
-                )
 
                 Image(
                     modifier = Modifier

@@ -21,13 +21,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.appautohub.data.model.Produto
+import com.example.appautohub.data.viewmodel.CarrinhoViewModel
 import com.example.appautohub.data.viewmodel.ProdutoViewModel
+import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
 @Composable
 fun CardProduct(produto: Produto, navController: NavController, modifier: Modifier = Modifier) {
     var isExpanded by remember { mutableStateOf(false) }
     var produtoSelection = koinInject<ProdutoViewModel>()
+    val carrinhoViewModel: CarrinhoViewModel = koinViewModel()
+
 
     Card(
         modifier = modifier
@@ -83,7 +87,7 @@ fun CardProduct(produto: Produto, navController: NavController, modifier: Modifi
 
                 Button(
                     onClick = {
-                        navController.navigate("payment")
+                        carrinhoViewModel.adicionarProduto(produto)
                     },
                     colors = ButtonDefaults.buttonColors(
                         Color(48, 50, 62)
@@ -92,7 +96,7 @@ fun CardProduct(produto: Produto, navController: NavController, modifier: Modifi
                         .padding(bottom = 8.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    Text("Comprar", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(245, 240, 242))
+                    Text("Adicionar ao Carrinho", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(245, 240, 242))
                 }
             }
         }

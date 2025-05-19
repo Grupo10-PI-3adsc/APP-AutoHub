@@ -31,13 +31,7 @@ import com.example.appautohub.ui.theme.components.HeaderTitle
 var oleoImage = R.drawable.oleo
 
 
-val listaProdutos = listOf(
-    Produto("Óleo para Motor", oleoImage, 49.90, "Óleo sintético 5W30 para motores."),
-    Produto("Pneu Aro 15", oleoImage, 399.99, "Pneu de alta durabilidade para carros."),
-    Produto("Filtro de Ar", oleoImage, 29.90, "Filtro de ar para melhor desempenho do motor."),
-    Produto("Pastilha de Freio", oleoImage, 99.90, "Pastilha de freio para segurança no trânsito."),
-    Produto("Bateria 60Ah", oleoImage, 499.90, "Bateria automotiva de longa duração.")
-)
+
 
 @Composable
 fun Pix(navController: NavController, modifier: Modifier = Modifier){
