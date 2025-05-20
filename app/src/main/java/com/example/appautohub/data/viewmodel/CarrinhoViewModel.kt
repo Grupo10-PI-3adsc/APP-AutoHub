@@ -33,6 +33,12 @@ class CarrinhoViewModel : ViewModel() {
         _produtosCarrinho.value = emptyList()
     }
 
+    val quantidadeCarrinho = produtosCarrinho.map { it.size }.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        0
+    )
+
     val totalCarrinho: StateFlow<Double> = produtosCarrinho
         .map { produtos -> produtos.sumOf { it.preco } }
         .stateIn(

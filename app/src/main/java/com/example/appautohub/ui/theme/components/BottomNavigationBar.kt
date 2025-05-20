@@ -16,15 +16,19 @@ import com.example.appautohub.R
 
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.example.appautohub.data.viewmodel.CarrinhoViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
+    val carrinhoViewModel: CarrinhoViewModel = koinViewModel()
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(74.dp) // aumentei aqui de 60 para 74
             .background(Color.DarkGray)
-            .padding(horizontal = 24.dp),
+            .padding(horizontal = 50.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -38,15 +42,9 @@ fun BottomNavigationBar(navController: NavController) {
             )
         }
 
-        // Carrinho
-        IconButton(onClick = { navController.navigate("carrinho") }) {
-            Icon(
-                painter = painterResource(id = R.drawable.carrinho),
-                contentDescription = "Carrinho",
-                tint = Color.White,
-                modifier = Modifier.size(30.dp)
-            )
-        }
+        // Carrinho com badge animado
+        IconeCarrinho(navController = navController, viewModel = carrinhoViewModel)
+
 
         // Pedidos
         IconButton(onClick = { navController.navigate("pedidos") }) {
@@ -59,4 +57,5 @@ fun BottomNavigationBar(navController: NavController) {
         }
     }
 }
+
 
