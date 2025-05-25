@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.paginas.Cadastro.RegisterScreen
 import com.example.appautohub.paginas.bemVindo.WelcomeScreen
 import com.example.appautohub.paginas.Login.LoginScreen
@@ -28,6 +29,7 @@ import com.example.appautohub.paginas.produtos.AllProdutos
 import com.example.appautohub.paginas.produtos.Products
 import com.example.appautohub.paginas.produtos.ProdutoExpandido
 import com.example.appautohub.ui.theme.AppAutoHubTheme
+import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +44,13 @@ class MainActivity : ComponentActivity() {
                         startDestination = "welcome",
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable("welcome") { WelcomeScreen(navController) }
+                        composable("welcome") {
+                            WelcomeScreen(navController)
+                        val viewModel: UsuarioViewModel = koinInject()
+//                            viewModel.loginUsuario("" , "",  { sucesso ->
+//                                navController.navigate("produtos")
+//                            })
+                        }
                         composable("login") { LoginScreen(navController) }
                         composable("register") { RegisterScreen(navController) }
                         composable("payment") { PaymentScreen(navController) }
