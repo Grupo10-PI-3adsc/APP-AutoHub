@@ -5,21 +5,20 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
+object RetrofitPagamento {
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY // Mostra corpo da requisição/resposta
+            level = HttpLoggingInterceptor.Level.BODY
         })
         .build()
 
-    val api: ApiService by lazy {
+    val apiPagamento: ApiPagamento by lazy {
         Retrofit.Builder()
-//             .baseUrl("http://10.18.32.13:8080")  // <- (emulador Android)
-            .baseUrl("http://54.147.227.169")  // <- (celular externo)
-            .client(client) // <- adiciona o client com logging
+            .baseUrl("http://192.168.1.104:3000/") // <- Certifique-se do final com /
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ApiService::class.java)
+            .create(ApiPagamento::class.java)
     }
 }
