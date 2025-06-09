@@ -2,12 +2,12 @@ package com.example.appautohub.paginas.pedidos
 
 import com.example.appautohub.ui.theme.components.HeaderApp
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,26 +16,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavController
+import com.example.appautohub.data.viewmodel.PedidoViewModel
+import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.ui.theme.components.HeaderTitle
-
+import org.koin.compose.koinInject
 
 @Composable
-fun PedidoScreen(navController: NavController){
+fun PedidoScreen(navController: NavController) {
+    val viewModel = koinInject<PedidoViewModel>()
+    val usuarioViewModel = koinInject<UsuarioViewModel>()
+    val pedidos by viewModel.pedidosUsuario.collectAsState()
 
-    val headers = listOf("Tipo", "Data", "Prod.", "Valor", "")
-    val itemsList = listOf(
-        listOf("M. de obra", "01/01/2025", "2x Óleo", "R$ 50,00"),
-        listOf("M. de obra", "02/01/2025", "3x Óleo ", "R$ 30,00"),
-        listOf("M. de obra", "03/01/2025", "1x Óleo ", "R$ 70,00"),
-        listOf("M. de obra", "04/01/2025", "1x Óleo ", "R$ 90,00"),
-        listOf("M. de obra", "05/01/2025", "5x Óleo ", "R$ 120,00")
-    )
+    val usuarioId = usuarioViewModel.loginResponse?.id ?: 0
 
-    Column (
+    LaunchedEffect(Unit) {
+        viewModel.buscarPedidosPorUsuario(usuarioId.toInt())
+    }
+
+    val headers = listOf("Tipo", "Data", "Valor", "Status")
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(245, 240, 242))
@@ -66,43 +70,61 @@ fun PedidoScreen(navController: NavController){
                             fontSize = 15.sp,
                             color = Color(0xFF30323E),
                             modifier = Modifier
-                                .padding(horizontal = 11.dp), // Espaçamento para ajustar a separação
-                            textAlign = TextAlign.Start // Alinhamento à esquerda
+                                .padding(horizontal = 11.dp)
+                                .weight(1f),
+                            textAlign = TextAlign.Start
                         )
                     }
                 }
             }
 
+            items(pedidos) { pedido ->
+                var expanded by remember { mutableStateOf(false) }
 
-            items(itemsList) { item ->
-                Row(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color(217, 217, 217))
-                        .padding(horizontal = 10.dp, vertical = 10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        .padding(10.dp)
+                        .clickable { expanded = !expanded }  // <-- Linha toda clicável
                 ) {
-                    item.forEach { data ->
-                        Text(
-                            text = data,
-                            fontSize = 16.sp,
-                            color = Color(0xFF30323E), // Cor aplicada
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    Button(
-                        onClick = { /* Ação ao clicar no botão */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFDDBB45)
-                        ),
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+                        Text(pedido.tipo, fontSize = 13.sp, color = Color(0xFF30323E), modifier = Modifier.weight(1f))
+                        Text(pedido.data, fontSize = 13.sp, color = Color(0xFF30323E), modifier = Modifier.weight(1f))
+                        Text(pedido.valor, fontSize = 13.sp, color = Color(0xFF30323E), modifier = Modifier.weight(1f))
                         Text(
-                            "Cancelar",
-                            color = Color(0xFF30323D),
-                            fontSize = 15.sp
+                            pedido.status,
+                            fontSize = 13.sp,
+                            color = Color(0xFF30323E),
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth(),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            softWrap = false
                         )
+
                     }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    if (expanded) {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            pedido.produtos.forEach { produto ->
+                                Text(
+                                    text = "${produto.nome} - R$ ${"%.2f".format(produto.preco)}",
+                                    fontSize = 14.sp,
+                                    color = Color(0xFF50535F),
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            }
+                        }
+                    }
+
                 }
             }
         }

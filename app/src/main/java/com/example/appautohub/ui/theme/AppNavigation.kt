@@ -33,6 +33,7 @@ fun AppNavigator() {
         composable("allprodutos" ) { AllProdutos(navController) }
         composable("carrinho") {CartScreen(navController) }
         composable("perfil") { PerfilScreen(navController) }
-        composable("pedidos") { PedidoScreen(navController)}
+        composable("pedidos") { PedidoScreen(navController
+        )}
     }
 }
