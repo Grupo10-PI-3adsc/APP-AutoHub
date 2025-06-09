@@ -8,34 +8,28 @@ import androidx.lifecycle.viewModelScope
 import com.example.appautohub.data.model.LoginResponse
 import com.example.appautohub.data.remote.*
 import com.example.appautohub.data.remote.RetrofitPagamento.apiPagamento
+import com.example.appautohub.data.state.PixUiState
+import com.example.appautohub.data.state.StatusUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-// Estado para consultarStatus
-sealed class StatusUiState {
-    object Idle : StatusUiState()
-    object Loading : StatusUiState()
-    data class Success(val status: StatusResponse) : StatusUiState()
-    data class Error(val message: String) : StatusUiState()
-}
 
-// Novo estado para gerarPix
-sealed class PixUiState {
-    object Idle : PixUiState()
-    object Loading : PixUiState()
-    data class Success(val pixResponse: PixResponse) : PixUiState()
-    data class Error(val message: String) : PixUiState()
-}
 
 class ViewModelPagamento : ViewModel() {
+
+
 
     var loginResponse by mutableStateOf<LoginResponse?>(null)
         private set
 
     val id = loginResponse?.id.toString()
+
+
+    var ultimoTxId by mutableStateOf<String?>(null)
+        private set
 
     // Estado para consultar status do pagamento
     private val _uiState = MutableStateFlow<StatusUiState>(StatusUiState.Idle)
@@ -45,18 +39,14 @@ class ViewModelPagamento : ViewModel() {
     private val _pixUiState = MutableStateFlow<PixUiState>(PixUiState.Idle)
     val pixUiState: StateFlow<PixUiState> = _pixUiState
 
+
     fun consultarStatus() {
         _uiState.value = StatusUiState.Loading
 
         viewModelScope.launch {
             try {
-                val response = apiPagamento.consultarStatus(UsuarioIdRequest(id)).execute()
+                val response = apiPagamento.consultarStatus(UsuarioIdRequest(id))
 
-                if (response.isSuccessful && response.body() != null) {
-                    _uiState.value = StatusUiState.Success(response.body()!!)
-                } else {
-                    _uiState.value = StatusUiState.Error("Erro na resposta: ${response.code()}")
-                }
             } catch (e: IOException) {
                 _uiState.value = StatusUiState.Error("Erro de rede: ${e.localizedMessage}")
             } catch (e: HttpException) {
@@ -72,13 +62,21 @@ class ViewModelPagamento : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val response = apiPagamento.gerarPix(request).execute()
+                val response = apiPagamento.gerarPix(request)
 
-                if (response.isSuccessful && response.body() != null) {
-                    _pixUiState.value = PixUiState.Success(response.body()!!)
+                if (response.isSuccessful) {
+                    val pixResponse = response.body()
+
+                    if (pixResponse != null) {
+                        _pixUiState.value = PixUiState.Success(pixResponse)
+                        ultimoTxId = pixResponse.txid // 👈 salva o txid para consulta futura
+                    } else {
+                        _pixUiState.value = PixUiState.Error("Erro: resposta vazia")
+                    }
                 } else {
-                    _pixUiState.value = PixUiState.Error("Erro na resposta: ${response.code()}")
+                    _pixUiState.value = PixUiState.Error("Erro HTTP: ${response.code()}")
                 }
+
             } catch (e: IOException) {
                 _pixUiState.value = PixUiState.Error("Erro de rede: ${e.localizedMessage}")
             } catch (e: HttpException) {
@@ -88,6 +86,7 @@ class ViewModelPagamento : ViewModel() {
             }
         }
     }
+
 
     fun resetarEstado() {
         _uiState.value = StatusUiState.Idle

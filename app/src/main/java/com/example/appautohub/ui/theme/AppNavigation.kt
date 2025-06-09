@@ -27,7 +27,6 @@ fun AppNavigator() {
         composable("login") { LoginScreen(navController) }
         composable("register") { RegisterScreen(navController) }
         composable("payment") { PaymentScreen(navController) }
-        composable("pix") { Pix(navController) }
         composable("cartao") { CardScreen(navController) }
         composable("boleto") { BoletoScreen(navController) }
         composable("produtos" ) { Products(navController = navController) }

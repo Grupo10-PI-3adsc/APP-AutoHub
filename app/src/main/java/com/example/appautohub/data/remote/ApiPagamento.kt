@@ -8,6 +8,7 @@ import com.example.appautohub.data.model.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 
 var loginResponse by mutableStateOf<LoginResponse?>(null)
@@ -21,12 +22,14 @@ val cpfcnpj = loginResponse?.cpfCnpj.toString()
     data class PixRequest(
         val nome: String = nomee,
         val cpf: String = cpfcnpj,
+        val valor: String,
         val usuarioId: String = id,
     )
 
     data class PixResponse(
-        val txid: String,
-        val pixCopiaECola: String
+    val txid: String,
+    val pixCopiaECola: String,
+    val qrCodeImageUrl: String
     )
 
     data class UsuarioIdRequest(
@@ -42,10 +45,10 @@ val cpfcnpj = loginResponse?.cpfCnpj.toString()
     interface ApiPagamento {
 
         @POST("/pix")
-        fun gerarPix(@Body request: PixRequest): Call<PixResponse>
+        suspend fun gerarPix(@Body request: PixRequest): Response<PixResponse>
 
         @POST("/ConsultarCobrancas")
-        fun consultarStatus(@Body request: UsuarioIdRequest): Call<StatusResponse>
+        suspend fun consultarStatus(@Body request: UsuarioIdRequest): Response<StatusResponse>
 
 
     }

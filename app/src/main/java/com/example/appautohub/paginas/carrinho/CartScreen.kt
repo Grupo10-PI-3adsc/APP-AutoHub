@@ -22,16 +22,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.appautohub.data.remote.PixRequest
 import com.example.appautohub.data.viewmodel.CarrinhoViewModel
+import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.ui.theme.components.HeaderApp
 import org.koin.compose.koinInject
+import com.example.appautohub.data.viewmodel.ViewModelPagamento
+import java.util.Locale
 
 
 @Composable
 fun CartScreen(navController: NavController) {
     val viewModel = koinInject<CarrinhoViewModel>()
+    val viewModelUser = koinInject<UsuarioViewModel>()
+
     val cartItems by viewModel.produtosCarrinho.collectAsState()
     val total by viewModel.totalCarrinho.collectAsState()
+    val pagamentoViewModel = koinInject<ViewModelPagamento>()
+//val totalPagamento = total.toString()
+    val totalPagamento = "%.2f".format(Locale.US, total) // força ponto (.)
+
+    val userProfile = viewModelUser.loginResponse
+
+
+    val identificador = pagamentoViewModel.loginResponse?.id ?: userProfile?.id
+    val Ident = identificador.toString()
+
+    val mostrarPix = remember { mutableStateOf(false) }
+
+
+
+
 
     Column(
         modifier = Modifier
@@ -106,7 +127,20 @@ fun CartScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Button(
-                        onClick = { /* TODO: ação de pagamento */ },
+                        onClick = {
+                            println(pagamentoViewModel.loginResponse?.cpfCnpj)
+                            if (userProfile != null) {
+                                pagamentoViewModel.gerarPix(
+                                    PixRequest(
+                                        nome = pagamentoViewModel.loginResponse?.nome ?: userProfile.nome,
+                                        cpf = pagamentoViewModel.loginResponse?.cpfCnpj ?: userProfile.cpfCnpj,
+                                        valor = totalPagamento,
+                                        usuarioId = pagamentoViewModel.loginResponse?.id.toString() ?: userProfile.id.toString(),
+                                    )
+                                )
+                            }
+                            mostrarPix.value = true // ativa o componente Pix
+                        },
                         modifier = Modifier
                             .weight(1f)
                             .height(48.dp),
@@ -115,6 +149,11 @@ fun CartScreen(navController: NavController) {
                     ) {
                         Text("Pagar", fontSize = 16.sp, color = Color(0xFF30323D))
                     }
+
+                    if (mostrarPix.value) {
+                        ComponentePix(pagamentoViewModel = pagamentoViewModel)
+                    }
+
                     Button(
                         onClick = { viewModel.limparCarrinho() },
                         modifier = Modifier

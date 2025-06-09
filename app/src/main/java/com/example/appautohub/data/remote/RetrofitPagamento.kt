@@ -15,7 +15,7 @@ object RetrofitPagamento {
 
     val apiPagamento: ApiPagamento by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.104:3000/") // <- Certifique-se do final com /
+            .baseUrl("http://192.168.1.112:3000/") // <- Certifique-se do final com /
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
