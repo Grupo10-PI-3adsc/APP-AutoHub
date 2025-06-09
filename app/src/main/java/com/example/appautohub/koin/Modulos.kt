@@ -1,6 +1,7 @@
 package com.example.appautohub.koin
 
 import com.example.appautohub.data.viewmodel.CarrinhoViewModel
+import com.example.appautohub.data.viewmodel.PedidoViewModel
 import com.example.appautohub.data.viewmodel.ProdutoViewModel
 import com.example.appautohub.data.viewmodel.UsuarioViewModel
 import com.example.appautohub.data.viewmodel.ViewModelPagamento
@@ -26,5 +27,8 @@ val moduloGeral = module {
         ViewModelPagamento()
     }
 
+    single<PedidoViewModel> {
+        PedidoViewModel()
+    }
 
 }

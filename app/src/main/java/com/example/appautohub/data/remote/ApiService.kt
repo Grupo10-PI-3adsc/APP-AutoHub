@@ -4,10 +4,13 @@ import com.example.appautohub.data.model.LoginRequest
 import com.example.appautohub.data.model.LoginResponse
 import com.example.appautohub.data.model.Produto
 import com.example.appautohub.data.model.Usuario
+import com.example.appautohub.data.model.pedidos.PedidoRequisicao
+import com.example.appautohub.data.model.pedidos.PedidosResponseDto
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -19,5 +22,14 @@ interface ApiService {
 
     @GET("/api/produtos/listar-produtos")
     suspend fun getProdutos(): Response<List<Produto>>
+
+    @POST("/api/produtos/pedidos/{id}")
+    suspend fun criarPedido(@Body pedido: PedidoRequisicao, @Path("id") clienteId: Int
+    ): Response<PedidosResponseDto>
+
+    @GET("/api/produtos/pedidos/usuario/{id}")
+    suspend fun getPedidos(
+        @Path("id") id: Int
+    ): Response<List<PedidosResponseDto>>
 
 }
