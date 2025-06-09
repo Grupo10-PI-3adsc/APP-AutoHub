@@ -89,9 +89,30 @@ fun ComponentePix(
 
         AlertDialog(
             onDismissRequest = {},
-            confirmButton = {},
-            title = { Text("Pagamento Concluído") },
-            text = { Text("Pagamento realizado com sucesso!") }
+            confirmButton = {
+                Button(
+                    onClick = { /* você pode colocar uma ação, como fechar o dialog */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)) // Verde Material
+                ) {
+                    Text("OK", color = Color.White)
+                }
+            },
+            title = {
+                Text(
+                    text = "✅ Pagamento Concluído",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color(0xFF388E3C) // Verde escuro
+                )
+            },
+            text = {
+                Text(
+                    text = "Pagamento realizado com sucesso!",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color(0xFF2E7D32) // Outro tom de verde
+                )
+            },
+            containerColor = Color(0xFFE8F5E9), // Fundo do dialog (verde clarinho)
+            tonalElevation = 8.dp
         )
     }
 
