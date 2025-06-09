@@ -5,20 +5,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import coil.util.Logger
 import com.example.appautohub.data.model.LoginResponse
 import com.example.appautohub.data.remote.*
 import com.example.appautohub.data.remote.RetrofitPagamento.apiPagamento
 import com.example.appautohub.data.state.PixUiState
 import com.example.appautohub.data.state.StatusUiState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 import retrofit2.HttpException
 import java.io.IOException
-
+import kotlin.math.log
 
 
 class ViewModelPagamento : ViewModel() {
+
 
 
 
@@ -40,22 +44,55 @@ class ViewModelPagamento : ViewModel() {
     val pixUiState: StateFlow<PixUiState> = _pixUiState
 
 
-    fun consultarStatus() {
-        _uiState.value = StatusUiState.Loading
-
+    fun consultarStatus(txid: String) {
         viewModelScope.launch {
-            try {
-                val response = apiPagamento.consultarStatus(UsuarioIdRequest(id))
+            if (_uiState.value is StatusUiState.Success &&
+                (_uiState.value as StatusUiState.Success).status == "CONCLUIDA"
+            ) return@launch
 
-            } catch (e: IOException) {
-                _uiState.value = StatusUiState.Error("Erro de rede: ${e.localizedMessage}")
-            } catch (e: HttpException) {
-                _uiState.value = StatusUiState.Error("Erro HTTP: ${e.message}")
+            _uiState.value = StatusUiState.Loading
+
+            try {
+                while (true) {
+                    val response = apiPagamento.consultarStatus(ConsultarPixRequest(txid))
+
+                    if (response.isSuccessful) {
+                        val statusResponse = response.body()
+
+                        if (statusResponse != null) {
+                            val status = statusResponse.status
+                            println("🟡 Status atual do pagamento (txid=$txid): $status")
+
+                            if (status == "CONCLUIDA") {
+                                println("✅ Pagamento CONCLUÍDO com sucesso!")
+                                _uiState.value = StatusUiState.Success("CONCLUIDA")
+                                break
+                            } else {
+                                _uiState.value = StatusUiState.Success(status)
+                            }
+                        } else {
+                            _uiState.value = StatusUiState.Error("Resposta vazia ao consultar status")
+                            break
+                        }
+                    } else {
+                        _uiState.value = StatusUiState.Error("Erro HTTP: ${response.code()}")
+                        break
+                    }
+
+                    delay(5000)
+                }
+
             } catch (e: Exception) {
-                _uiState.value = StatusUiState.Error("Erro desconhecido: ${e.localizedMessage}")
+                _uiState.value = StatusUiState.Error("Erro: ${e.localizedMessage}")
             }
         }
     }
+
+
+    fun resetStatus() {
+        _uiState.value = StatusUiState.Idle
+    }
+
 
     fun gerarPix(request: PixRequest) {
         _pixUiState.value = PixUiState.Loading

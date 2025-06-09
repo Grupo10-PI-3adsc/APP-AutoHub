@@ -151,7 +151,8 @@ fun CartScreen(navController: NavController) {
                     }
 
                     if (mostrarPix.value) {
-                        ComponentePix(pagamentoViewModel = pagamentoViewModel)
+                        Spacer(modifier = Modifier.height(16.dp))
+                        ComponentePix(pagamentoViewModel = pagamentoViewModel, navController = navController)
                     }
 
                     Button(

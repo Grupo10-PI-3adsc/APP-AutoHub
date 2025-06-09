@@ -10,6 +10,7 @@ import retrofit2.http.POST
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 var loginResponse by mutableStateOf<LoginResponse?>(null)
     private set
@@ -41,14 +42,17 @@ val cpfcnpj = loginResponse?.cpfCnpj.toString()
     val status: String
     )
 
+data class ConsultarPixRequest(
+    val txid: String
+)
 
     interface ApiPagamento {
 
         @POST("/pix")
         suspend fun gerarPix(@Body request: PixRequest): Response<PixResponse>
 
-        @POST("/ConsultarCobrancas")
-        suspend fun consultarStatus(@Body request: UsuarioIdRequest): Response<StatusResponse>
+        @POST("/ConsultarPix")
+        suspend fun consultarStatus(@Body body: ConsultarPixRequest): Response<StatusResponse>
 
 
     }
